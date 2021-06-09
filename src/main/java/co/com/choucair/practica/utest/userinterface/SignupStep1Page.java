@@ -18,8 +18,6 @@ public class SignupStep1Page {
             .located(By.id("birthYear"));
     public static final Target INPUT_LANGUAGE= Target.the("to type language")
             .located(By.xpath("//*[@id=\"languages\"]/div[1]/input"));
-//    public static final Target SELECT_LANGUAGE= Target.the("to select language")
-//            .located(By.xpath("//*[@id=\"ui-select-choices-row-2-0\"]/span/div/span"));
     public static final Target BUTTON_NEXT = Target.the("go to the next step")
             .located(By.xpath("//*[@id=\"regs_container\"]/div/div[2]/div/div[2]/div/form/div[2]/a"));
 }

@@ -27,13 +27,6 @@ public class SignupUtestStepDefinitions {
     @When("^he type his personal basic data$")
     public void heTypeHisPersonalBasicData ( List<PersonalBasicData> personalBasicData ){
         OnStage.theActorInTheSpotlight().attemptsTo(TypePersonalData.onStep1(personalBasicData.get(0)));
-//        OnStage.theActorInTheSpotlight().attemptsTo(TypePersonalData.onStep1(personalBasicData.get(0).getStrFirstName(),
-//                personalBasicData.get(0).getStrLastName(),
-//                personalBasicData.get(0).getStrEmail(),
-//                personalBasicData.get(0).getMonth(),
-//                personalBasicData.get(0).getDay(),
-//                personalBasicData.get(0).getYear(),
-//                personalBasicData.get(0).getLanguages()));
     }
 
     @When("^he type his address data$")

@@ -6,21 +6,23 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.questions.Text;
 
-public class Answer implements Question{
-    private String strWelcomeMessage;
+import java.util.List;
 
-    public Answer(String strWelcomeMessage) {
-        this.strWelcomeMessage = strWelcomeMessage;
+public class Answer implements Question{
+    private List<WelcomeData> welcomeData;
+
+    public Answer(List<WelcomeData> welcomeData) {
+        this.welcomeData = welcomeData;
     }
 
-    public static Answer toThe(WelcomeData welcomeData) {
-        return new Answer(welcomeData.getStrWelcomeMessage());
+    public static Answer toThe(List<WelcomeData> welcomeData) {
+        return new Answer(welcomeData);
     }
 
     @Override
     public Boolean answeredBy(Actor actor) {
         String welcomeMessage = Text.of(SignupWelcomePage.WELCOME_TEXT).viewedBy(actor).asString();
-        if(strWelcomeMessage.equals(welcomeMessage)){
+        if(welcomeData.get(0).getStrWelcomeMessage().equals(welcomeMessage)){
             return true;
         }else{
             return false;

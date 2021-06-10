@@ -8,44 +8,35 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.screenplay.GivenWhenThen;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
 import java.util.List;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.*;
+import static net.serenitybdd.screenplay.actors.OnStage.*;
+
 public class SignupUtestStepDefinitions {
     @Before
     public void setStage(){
-        OnStage.setTheStage(new OnlineCast());
+        setTheStage(new OnlineCast());
     }
 
-    @Given("^that Gabriel open the utest page$")
-    public void thatGabrielOpenTheUtestPage (  ){
-        OnStage.theActorCalled("Gabriel").wasAbleTo(OpenUp.thePage());
+    @Given("^that Gabriel get the utest page$")
+    public void thatGabrielGetTheUtestPage (  ){
+        theActorCalled("Gabriel").wasAbleTo(OpenUp.thePage());
     }
 
-    @When("^he type his personal basic data$")
-    public void heTypeHisPersonalBasicData ( List<PersonalBasicData> personalBasicData ){
-        OnStage.theActorInTheSpotlight().attemptsTo(TypePersonalData.onStep1(personalBasicData.get(0)));
+    @When("^he registers$")
+    public void heRegisters ( List<PersonalData> data ){
+        theActorInTheSpotlight().attemptsTo(TypePersonalInformation.with(data),
+                TypeAddressInformation.with(data),
+                TypeDeviceInformation.with(data),
+                TypeSecurityInformation.with(data)
+                );
     }
 
-    @When("^he type his address data$")
-    public void heTypeHisAddressData (List<AddressData> addressData){
-        OnStage.theActorInTheSpotlight().attemptsTo(TypeAddressData.onStep2(addressData.get(0)));
-    }
-
-    @When("^he type his device data$")
-    public void heTypeHisDeviceData (List<DeviceData> deviceData) {
-        OnStage.theActorInTheSpotlight().attemptsTo(TypeDeviceData.onStep3(deviceData.get(0)));
-    }
-
-    @When("^he type his security personal access and accept the terms$")
-    public void heTypeHisSecurityPersonalAccessAndAcceptTheTerms (List<SecurityData> securityData) {
-        OnStage.theActorInTheSpotlight().attemptsTo(TypeSecurityData.onStep4(securityData.get(0)));
-    }
-
-    @Then("^he have a welcome to the site$")
-    public void heHaveAWelcomeToTheSite (List<WelcomeData> welcomeData) {
-        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(Answer.toThe(welcomeData.get(0))));
+    @Then("^he has registered$")
+    public void heHasRegistered (List<WelcomeData> welcomeData) {
+        theActorInTheSpotlight().should(seeThat(Answer.toThe(welcomeData)));
     }
 }
